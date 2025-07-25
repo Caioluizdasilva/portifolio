@@ -1,13 +1,16 @@
 /* --- Importação de Fonte e Reset --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+html {
+    scroll-behavior: smooth; /* Habilita a rolagem suave */
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    scroll-behavior: smooth;
 }
 
 /* --- Variáveis de Cor (Paleta) --- */
@@ -25,12 +28,50 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--texto-claro);
     background-color: var(--cinza-bg);
+    overflow-x: hidden; 
+    position: relative; /* Necessário para o z-index do blob */
+}
+
+/* --- EFEITO DE FUNDO INTERATIVO (BLOB) --- */
+#blob {
+    background: radial-gradient(circle, rgba(255, 230, 8, 0.3) 0%, rgba(255, 230, 8, 0) 60%);
+    height: 400px;
+    width: 400px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -2;
+    pointer-events: none; /* Garante que o blob não interfira com cliques */
+}
+
+#blur-overlay {
+    backdrop-filter: blur(120px);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+/* --- ANIMAÇÃO DE ROLAGEM --- */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title {
@@ -141,9 +182,7 @@ header.scrolled .ul li a {
 .hero-content h3 { font-size: 1.5rem; font-weight: 400; }
 .hero-content h1 { font-size: 4.5rem; font-weight: 700; color: var(--amarelo-principal); margin: 0.5rem 0; }
 .hero-content p { font-size: 1.1rem; margin: 1.5rem 0; line-height: 1.6; max-width: 500px; }
-.social-media { margin: 1.5rem 0; display: flex; gap: 1.5rem; }
-.social-media a i { font-size: 1.8rem; color: var(--texto-claro); transition: all 0.3s ease; }
-.social-media a:hover i { color: var(--amarelo-principal); transform: scale(1.2); }
+.hero-buttons { display: flex; gap: 1rem; align-items: center; margin: 2rem 0; }
 .btn { display: inline-block; background-color: var(--amarelo-principal); color: var(--texto-escuro); padding: 1rem 2.5rem; font-weight: 600; border-radius: 50px; transition: all 0.3s ease; }
 .btn:hover { background-color: var(--amarelo-secundario); transform: translateY(-3px); }
 .hero-image { max-width: 400px; }
@@ -152,23 +191,62 @@ header.scrolled .ul li a {
 #changing-text::after { content: ''; position: absolute; right: -8px; width: 3px; height: 100%; background-color: var(--amarelo-principal); animation: blink 0.7s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* Carrossel de Tecnologias */
+.tech-scroller {
+    max-width: 600px;
+    margin-top: 2.5rem;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+.tech-scroller .scroller-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    padding-block: 1rem;
+}
+.tech-scroller .tag-list {
+    margin: 0;
+    padding-inline: 0;
+    animation: scroll 40s linear infinite;
+}
+@keyframes scroll {
+    to {
+        transform: translateX(calc(-100% - 2rem));
+    }
+}
+.tech-scroller .tag-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: #ccc;
+    background: var(--cinza-card);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+}
+.tech-scroller .tag-list i {
+    font-size: 1.5rem;
+}
+
 /* --- Sections --- */
 section {
     padding: 6rem 0;
 }
-.services, .contact, .aulas, .courses {
+.skills, .contact, .aulas, .courses {
     background-color: var(--cinza-card);
 }
 .projects, .experience, .education {
     background-color: var(--cinza-bg);
 }
 
-/* --- Services --- */
-.service-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-.service-item { background: var(--cinza-card); padding: 2rem; border-radius: 10px; text-align: center; transition: all 0.3s ease; border: 2px solid transparent; }
-.service-item:hover { transform: translateY(-10px); border-color: var(--amarelo-principal); }
-.icon-service { font-size: 3rem; color: var(--amarelo-principal); margin-bottom: 1rem; }
-.service-item h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+/* --- Habilidades (Antigo Serviços) --- */
+.skill-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+.skill-item { background: var(--cinza-bg); padding: 2rem; border-radius: 10px; text-align: center; transition: all 0.3s ease; border: 2px solid transparent; }
+.skill-item:hover { transform: translateY(-10px); border-color: var(--amarelo-principal); }
+.icon-skill { font-size: 3rem; color: var(--amarelo-principal); margin-bottom: 1rem; }
+.skill-item h3 { font-size: 1.5rem; margin-bottom: 1rem; }
 
 /* --- Projects --- */
 .project-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
@@ -211,10 +289,67 @@ section {
 .timeline-company { font-size: 1rem; font-weight: 400; margin-bottom: 0.8rem; }
 .timeline-description { font-size: 0.95rem; line-height: 1.6; }
 
-/* --- Seção Cursos --- */
-.courses-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-.course-item { background: var(--cinza-bg); padding: 1.2rem 2rem; border-radius: 8px; text-align: center; transition: all 0.3s ease; border: 1px solid var(--cinza-card); font-weight: 500; flex-grow: 1; min-width: 300px; }
-.course-item:hover { transform: translateY(-5px); border-color: var(--amarelo-principal); background-color: var(--cinza-card); }
+/* --- Seção Cursos (Círculos Interativos) --- */
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    perspective: 1000px;
+}
+.course-circle {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s;
+    cursor: pointer;
+}
+.course-circle:hover {
+    transform: rotateY(180deg);
+}
+.course-front, .course-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+.course-front {
+    background-color: var(--cinza-bg);
+    border: 3px solid var(--amarelo-principal);
+}
+.course-front i {
+    font-size: 3rem;
+    color: var(--amarelo-principal);
+    margin-bottom: 0.5rem;
+}
+.course-front h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.course-back {
+    background-color: var(--amarelo-principal);
+    color: var(--texto-escuro);
+    transform: rotateY(180deg);
+}
+.course-back h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.course-back p {
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+.course-back strong {
+    font-weight: 700;
+}
 
 /* --- Seção Aulas --- */
 .aulas-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
@@ -253,7 +388,6 @@ section {
     .desktop-only-contact {
         display: none;
     }
-
     #nav-menu {
         position: fixed;
         top: 0;
@@ -280,7 +414,6 @@ section {
         display: block;
         margin-top: 2rem;
     }
-
     .hamburger-icon.active .bar:nth-child(2) { opacity: 0; }
     .hamburger-icon.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger-icon.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
