@@ -28,6 +28,19 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(section);
     });
 
+    // --- NOVO: LÓGICA DO MINI-BLOB NOS CARDS DE HABILIDADE ---
+    const skillItems = document.querySelectorAll('.skill-item');
+    skillItems.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            item.style.setProperty('--mouse-x', `${x}px`);
+            item.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -67,39 +80,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 navMenu.classList.remove('active');
             });
         });
-    }
-
-    // --- LÓGICA DO FORMULÁRIO DE CONTATO COM FORMSPREE ---
-    const form = document.getElementById("contactForm");
-    
-    async function handleSubmit(event) {
-      event.preventDefault();
-      const status = document.getElementById("form-status");
-      const data = new FormData(event.target);
-      
-      try {
-        const response = await fetch(event.target.action, {
-          method: form.method,
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          status.textContent = "Mensagem enviada com sucesso!";
-          status.style.color = 'var(--amarelo-secundario)';
-          form.reset();
-        } else {
-          status.textContent = "Oops! Houve um problema ao enviar seu formulário.";
-          status.style.color = 'red';
-        }
-      } catch (error) {
-        status.textContent = "Oops! Houve um problema ao enviar seu formulário.";
-        status.style.color = 'red';
-      }
-    }
-
-    if (form) {
-      form.addEventListener("submit", handleSubmit);
     }
 
     // --- LÓGICA DO HEADER QUE ENCOLHE AO ROLAR ---
@@ -204,11 +184,9 @@ document.addEventListener("DOMContentLoaded", function() {
             classButton: "Ver Repositório",
             contactTitle: "Vamos nos Conectar",
             contactInfoTitle: "Informações de Contato",
-            contactFormTitle: "Envie uma Mensagem",
-            formName: "Seu Nome",
-            formEmail: "Seu E-mail",
-            formMessage: "Sua Mensagem",
-            formButton: "Enviar",
+            contactSocialsTitle: "Me encontre nas redes",
+            linkedinButton: "LinkedIn",
+            githubButton: "GitHub",
             footerText: "Todos os direitos reservados © 2025 bylcscaio"
         },
         en: {
@@ -279,11 +257,9 @@ document.addEventListener("DOMContentLoaded", function() {
             classButton: "View Repository",
             contactTitle: "Let's Connect",
             contactInfoTitle: "Contact Information",
-            contactFormTitle: "Send a Message",
-            formName: "Your Name",
-            formEmail: "Your Email",
-            formMessage: "Your Message",
-            formButton: "Send",
+            contactSocialsTitle: "Find me on the socials",
+            linkedinButton: "LinkedIn",
+            githubButton: "GitHub",
             footerText: "All rights reserved © 2025 bylcscaio"
         },
         es: {
@@ -354,11 +330,9 @@ document.addEventListener("DOMContentLoaded", function() {
             classButton: "Ver Repositorio",
             contactTitle: "Conectemos",
             contactInfoTitle: "Información de Contacto",
-            contactFormTitle: "Enviar un Mensaje",
-            formName: "Tu Nombre",
-            formEmail: "Tu Email",
-            formMessage: "Tu Mensaje",
-            formButton: "Enviar",
+            contactSocialsTitle: "Encuéntrame en las redes",
+            linkedinButton: "LinkedIn",
+            githubButton: "GitHub",
             footerText: "Todos los derechos reservados © 2025 bylcscaio"
         },
         fr: {
@@ -429,11 +403,9 @@ document.addEventListener("DOMContentLoaded", function() {
             classButton: "Voir le Dépôt",
             contactTitle: "Connectons-nous",
             contactInfoTitle: "Informations de Contact",
-            contactFormTitle: "Envoyer un Message",
-            formName: "Votre Nom",
-            formEmail: "Votre E-mail",
-            formMessage: "Votre Message",
-            formButton: "Envoyer",
+            contactSocialsTitle: "Retrouvez-moi sur les réseaux",
+            linkedinButton: "LinkedIn",
+            githubButton: "GitHub",
             footerText: "Tous droits réservés © 2025 bylcscaio"
         }
     };
@@ -451,7 +423,11 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.getAttribute('data-translate');
             if (translation[key]) {
-                element.textContent = translation[key];
+                if(element.tagName === 'SPAN' && element.parentElement.classList.contains('social-btn')) {
+                    element.textContent = translation[key];
+                } else if (element.tagName !== 'A' || !element.classList.contains('social-btn')) {
+                     element.textContent = translation[key];
+                }
             }
         });
         document.querySelectorAll('[data-translate-placeholder]').forEach(element => {

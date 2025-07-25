@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/6.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-    <!-- Adicionado Devicon para os logos de tecnologia -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <title>Caio Silva - Desenvolvedor Full Stack</title>
 </head>
 <body>
+    <div id="blob"></div>
+    <div id="blur-overlay"></div>
+
     <div class="background">
-        <!-- Header -->
         <header id="header">
             <div class="container">
                 <nav>
@@ -46,9 +47,6 @@
                 </nav>
             </div>
         </header>
-        <!-- End Header -->
-
-        <!-- Main -->
         <main id="start">
             <div class="hero">
                 <div class="container">
@@ -61,7 +59,6 @@
                             <a href="#" class="btn" data-translate="heroButton">Download CV</a>
                         </div>
 
-                        <!-- NOVO: Carrossel de Tecnologias -->
                         <div class="tech-scroller" data-speed="slow">
                             <ul class="tag-list scroller-inner">
                                 <li><i class="devicon-html5-plain"></i> HTML5</li>
@@ -90,9 +87,6 @@
                 </div>
             </div>
         </main>
-        <!-- End Main -->
-
-        <!-- Habilidades (antigo Serviços) -->
         <section class="skills" id="skills">
             <div class="container">
                 <h2 class="section-title" data-translate="skillsTitle">Habilidades Principais</h2>
@@ -266,25 +260,25 @@
                 </div>
             </div>
         </section>
+
         <section class="contact" id="contact">
             <div class="container">
                 <h2 class="section-title" data-translate="contactTitle">Vamos nos Conectar</h2>
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <h3 data-translate="contactInfoTitle">Informações de Contato</h3>
-                        <p><i class="fas fa-envelope"></i> caioluizsilva@icloud.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Nova Friburgo, RJ, Brasil</p>
-                        <p><i class="fas fa-phone"></i> +55 22 98152-0471</p>
-                    </div>
-                    <div class="contact-form">
-                        <h3 data-translate="contactFormTitle">Envie uma Mensagem</h3>
-                        <form id="contactForm" action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
-                            <input type="text" id="name" name="name" data-translate-placeholder="formName" placeholder="Seu Nome" required>
-                            <input type="email" id="email" name="email" data-translate-placeholder="formEmail" placeholder="Seu E-mail" required>
-                            <textarea id="message" name="message" rows="4" data-translate-placeholder="formMessage" placeholder="Sua Mensagem" required></textarea>
-                            <button type="submit" data-translate="formButton">Enviar</button>
-                        </form>
-                        <p id="form-status"></p>
+                <div class="contact-info">
+                    <h3 data-translate="contactInfoTitle">Informações de Contato</h3>
+                    <p><i class="fas fa-envelope"></i> caioluizdasilva@icloud.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nova Friburgo, RJ, Brasil</p>
+
+                    <div class="social-links">
+                        <h3 data-translate="contactSocialsTitle">Me encontre nas redes</h3>
+                        <a href="#" target="_blank" class="social-btn linkedin">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <span data-translate="linkedinButton">LinkedIn</span>
+                        </a>
+                        <a href="#" target="_blank" class="social-btn github">
+                            <i class="fa-brands fa-github"></i>
+                            <span data-translate="githubButton">GitHub</span>
+                        </a>
                     </div>
                 </div>
             </div>

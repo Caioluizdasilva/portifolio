@@ -243,10 +243,43 @@ section {
 
 /* --- Habilidades (Antigo Serviços) --- */
 .skill-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-.skill-item { background: var(--cinza-bg); padding: 2rem; border-radius: 10px; text-align: center; transition: all 0.3s ease; border: 2px solid transparent; }
+.skill-item { 
+    background: var(--cinza-bg); 
+    padding: 2rem; 
+    border-radius: 10px; 
+    text-align: center; 
+    transition: all 0.3s ease; 
+    border: 2px solid transparent; 
+    position: relative; /* Necessário para o novo efeito de mini-blob */
+    overflow: hidden; /* Necessário para o novo efeito de mini-blob */
+}
 .skill-item:hover { transform: translateY(-10px); border-color: var(--amarelo-principal); }
 .icon-skill { font-size: 3rem; color: var(--amarelo-principal); margin-bottom: 1rem; }
 .skill-item h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+/* --- NOVO: EFEITO MINI-BLOB PARA OS CARDS DE HABILIDADES --- */
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--amarelo-principal) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(20px);
+}
+.skill-item:hover::before {
+    opacity: 0.3;
+}
+/* Garante que o conteúdo do card fique por cima do mini-blob */
+.skill-item > * {
+    position: relative;
+    z-index: 1;
+}
 
 /* --- Projects --- */
 .project-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
@@ -282,12 +315,31 @@ section {
 .timeline-item::after { content: ''; position: absolute; top: 1.5rem; width: 20px; height: 20px; background-color: var(--amarelo-principal); border: 4px solid var(--cinza-bg); border-radius: 50%; z-index: 1; }
 .timeline-item:nth-child(odd)::after { right: -10px; }
 .timeline-item:nth-child(even)::after { left: -10px; }
-.timeline-content { background-color: var(--cinza-card); padding: 1.5rem; border-radius: 8px; position: relative; }
+.timeline-content { 
+    background-color: var(--cinza-card); 
+    padding: 1.5rem; 
+    border-radius: 8px; 
+    position: relative; 
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
 .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
 .timeline-date { font-size: 0.9rem; color: #ccc; display: block; margin-bottom: 0.5rem; }
 .timeline-title { font-size: 1.4rem; color: var(--amarelo-secundario); margin-bottom: 0.5rem; }
 .timeline-company { font-size: 1rem; font-weight: 400; margin-bottom: 0.8rem; }
 .timeline-description { font-size: 0.95rem; line-height: 1.6; }
+
+/* --- NOVO: EFEITO DE HOVER NA SEÇÃO FORMAÇÃO --- */
+.timeline-content:hover {
+    background-color: var(--amarelo-principal);
+    transform: scale(1.03); /* Efeito de 'saltar' para frente */
+}
+.timeline-content:hover,
+.timeline-content:hover .timeline-title,
+.timeline-content:hover .timeline-company,
+.timeline-content:hover .timeline-date,
+.timeline-content:hover .timeline-description {
+    color: var(--texto-escuro);
+}
 
 /* --- Seção Cursos (Círculos Interativos) --- */
 .courses-container {
@@ -361,18 +413,71 @@ section {
 .btn-repo { background-color: transparent; border: 2px solid var(--amarelo-principal); color: var(--amarelo-principal); padding: 0.7rem 1.8rem; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; }
 .btn-repo:hover { background-color: var(--amarelo-principal); color: var(--texto-escuro); }
 
-/* --- Contact --- */
-.contact-container { display: flex; flex-wrap: wrap; background: var(--cinza-bg); border-radius: 10px; overflow: hidden; }
-.contact-info, .contact-form { padding: 3rem; flex: 1; min-width: 300px; }
-.contact-info { background: var(--amarelo-principal); color: var(--texto-escuro); }
-.contact-info h3, .contact-form h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
-.contact-form h3 { color: var(--texto-claro); }
-.contact-info p { margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
-.contact-info p i { font-size: 1.2rem; }
-.contact-form form input, .contact-form form textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; border: none; border-radius: 5px; background-color: var(--cinza-card); color: var(--texto-claro); font-family: 'Poppins', sans-serif; }
-.contact-form form button { width: 100%; padding: 1rem; background-color: var(--amarelo-principal); color: var(--texto-escuro); border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
-.contact-form form button:hover { background-color: var(--amarelo-secundario); }
-#form-status { text-align: center; margin-top: 1rem; font-weight: 600; min-height: 1.5rem; }
+/* --- Seção de Contato Atualizada --- */
+.contact-info { 
+    background: var(--cinza-bg); 
+    border-radius: 10px;
+    padding: 3rem;
+    text-align: center;
+    width: 100%;
+}
+.contact-info h3 { 
+    font-size: 1.8rem; 
+    margin-bottom: 1.5rem; 
+    color: var(--texto-claro);
+}
+.contact-info p { 
+    margin-bottom: 1.5rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+    justify-content: center;
+    font-size: 1.1rem;
+}
+.contact-info p i { 
+    font-size: 1.2rem;
+    color: var(--amarelo-principal);
+}
+.social-links {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.social-links h3 {
+    color: var(--amarelo-principal);
+}
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    justify-content: center;
+}
+.social-btn.linkedin {
+    background-color: #0077B5;
+    color: white;
+}
+.social-btn.linkedin:hover {
+    background-color: #0A66C2;
+    transform: translateY(-3px);
+}
+.social-btn.github {
+    background-color: #333;
+    color: white;
+}
+.social-btn.github:hover {
+    background-color: #444;
+    transform: translateY(-3px);
+}
+.social-btn i {
+    font-size: 1.5rem;
+}
 
 /* --- Footer --- */
 .footer { background: var(--preto); color: var(--texto-claro); text-align: center; padding: 2rem 0; }
@@ -423,7 +528,6 @@ section {
     .hero .container { flex-direction: column-reverse; text-align: center; }
     .hero-content { margin-top: 2rem; }
     .hero-content p { margin-left: auto; margin-right: auto; }
-    .social-media { justify-content: center; }
 }
 
 @media (max-width: 768px) {
@@ -431,10 +535,17 @@ section {
     .hero-content h1 { font-size: 3rem; }
     .hero-content h3 { font-size: 1.2rem; }
     .controls-container { flex-grow: 1; justify-content: flex-end; }
-    .contact-container { flex-direction: column; }
+    
     .timeline::before { left: 10px; }
     .timeline-item { width: 100%; padding-left: 3rem; padding-right: 1rem; }
     .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; padding-left: 3rem; }
     .timeline-item:nth-child(odd) .timeline-content, .timeline-item:nth-child(even) .timeline-content { text-align: left; }
     .timeline-item::after { left: 1px; }
+
+    .social-links {
+        width: 100%;
+    }
+    .social-btn {
+        width: 100%;
+    }
 }
