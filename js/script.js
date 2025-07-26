@@ -21,16 +21,29 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }, {
-        threshold: 0.1 // A animação começa quando 10% da seção está visível
+        threshold: 0.1
     });
 
     sections.forEach(section => {
         observer.observe(section);
     });
 
-    // --- NOVO: LÓGICA DO MINI-BLOB NOS CARDS DE HABILIDADE ---
+    // --- LÓGICA DO MINI-BLOB NOS CARDS DE HABILIDADE ---
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            item.style.setProperty('--mouse-x', `${x}px`);
+            item.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // --- LÓGICA DO MINI-BLOB NOS CARDS DE FORMAÇÃO ---
+    const timelineItems = document.querySelectorAll('.timeline-content');
+    timelineItems.forEach(item => {
         item.addEventListener('mousemove', (e) => {
             const rect = item.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -127,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
             navContact: "Contato",
             heroGreeting: "Olá, eu sou",
             heroIntro: "e sou um ",
-            heroTyping: ["Desenvolvedor Full Stack", "Designer UX/UI", "Entusiasta de Tecnologia", "Freelancer"],
+            heroTyping: ["Desenvolvedor Full Stack", "Designer UX/UI", "Entusiasta de Tecnologia"],
             heroDescription: "Desenvolvedor apaixonado por transformar ideias em realidade digital, criando soluções criativas e funcionais que resolvem problemas reais.",
             heroButton: "Download CV",
             skillsTitle: "Habilidades Principais",
@@ -200,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
             navContact: "Contact",
             heroGreeting: "Hello, I am",
             heroIntro: "and I'm a ",
-            heroTyping: ["Full Stack Developer", "UX/UI Designer", "Technology Enthusiast", "Freelancer"],
+            heroTyping: ["Full Stack Developer", "UX/UI Designer", "Technology Enthusiast"],
             heroDescription: "A passionate developer dedicated to turning ideas into digital reality, creating creative and functional solutions that solve real problems.",
             heroButton: "Download CV",
             skillsTitle: "Core Skills",
@@ -273,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
             navContact: "Contacto",
             heroGreeting: "Hola, soy",
             heroIntro: "y soy un ",
-            heroTyping: ["Desarrollador Full Stack", "Diseñador UX/UI", "Entusiasta de la Tecnología", "Freelancer"],
+            heroTyping: ["Desarrollador Full Stack", "Diseñador UX/UI", "Entusiasta de la Tecnología"],
             heroDescription: "Un desarrollador apasionado por convertir ideas en realidad digital, creando soluciones creativas y funcionales que resuelven problemas reales.",
             heroButton: "Descargar CV",
             skillsTitle: "Habilidades Principales",
@@ -346,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
             navContact: "Contact",
             heroGreeting: "Bonjour, je suis",
             heroIntro: "et je suis un ",
-            heroTyping: ["Développeur Full Stack", "Designer UX/UI", "Passionné de Technologie", "Freelance"],
+            heroTyping: ["Développeur Full Stack", "Designer UX/UI", "Passionné de Technologie"],
             heroDescription: "Un développeur passionné par la transformation des idées en réalité numérique, créant des solutions créatives et fonctionnelles qui résolvent de vrais problèmes.",
             heroButton: "Télécharger CV",
             skillsTitle: "Compétences Principales",

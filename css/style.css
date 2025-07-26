@@ -250,14 +250,14 @@ section {
     text-align: center; 
     transition: all 0.3s ease; 
     border: 2px solid transparent; 
-    position: relative; /* Necessário para o novo efeito de mini-blob */
-    overflow: hidden; /* Necessário para o novo efeito de mini-blob */
+    position: relative;
+    overflow: hidden;
 }
 .skill-item:hover { transform: translateY(-10px); border-color: var(--amarelo-principal); }
 .icon-skill { font-size: 3rem; color: var(--amarelo-principal); margin-bottom: 1rem; }
 .skill-item h3 { font-size: 1.5rem; margin-bottom: 1rem; }
 
-/* --- NOVO: EFEITO MINI-BLOB PARA OS CARDS DE HABILIDADES --- */
+/* EFEITO MINI-BLOB PARA OS CARDS DE HABILIDADES */
 .skill-item::before {
     content: '';
     position: absolute;
@@ -275,7 +275,6 @@ section {
 .skill-item:hover::before {
     opacity: 0.3;
 }
-/* Garante que o conteúdo do card fique por cima do mini-blob */
 .skill-item > * {
     position: relative;
     z-index: 1;
@@ -320,7 +319,8 @@ section {
     padding: 1.5rem; 
     border-radius: 8px; 
     position: relative; 
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    overflow: hidden; /* Adicionado para conter o mini-blob */
 }
 .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
 .timeline-date { font-size: 0.9rem; color: #ccc; display: block; margin-bottom: 0.5rem; }
@@ -328,10 +328,10 @@ section {
 .timeline-company { font-size: 1rem; font-weight: 400; margin-bottom: 0.8rem; }
 .timeline-description { font-size: 0.95rem; line-height: 1.6; }
 
-/* --- NOVO: EFEITO DE HOVER NA SEÇÃO FORMAÇÃO --- */
+/* EFEITO DE HOVER NA SEÇÃO FORMAÇÃO */
 .timeline-content:hover {
     background-color: var(--amarelo-principal);
-    transform: scale(1.03); /* Efeito de 'saltar' para frente */
+    transform: scale(1.03);
 }
 .timeline-content:hover,
 .timeline-content:hover .timeline-title,
@@ -340,6 +340,30 @@ section {
 .timeline-content:hover .timeline-description {
     color: var(--texto-escuro);
 }
+
+/* ADICIONADO EFEITO MINI-BLOB PARA OS CARDS DE FORMAÇÃO */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--amarelo-secundario) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(30px);
+}
+.timeline-content:hover::before {
+    opacity: 0.5;
+}
+.timeline-content > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* --- Seção Cursos (Círculos Interativos) --- */
 .courses-container {
@@ -356,6 +380,7 @@ section {
     transform-style: preserve-3d;
     transition: transform 0.7s;
     cursor: pointer;
+    will-change: transform; /* OTIMIZAÇÃO DE ANIMAÇÃO */
 }
 .course-circle:hover {
     transform: rotateY(180deg);
