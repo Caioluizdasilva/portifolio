@@ -120,7 +120,9 @@ nav {
 .ul {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1.5rem;
+    flex-grow: 1; 
+    justify-content: center;
 }
 .ul li a {
     color: var(--texto-claro);
@@ -152,7 +154,7 @@ header.scrolled .logo a {
     font-size: 1.5rem;
 }
 header.scrolled .ul {
-    gap: 1rem;
+    gap: 1.2rem;
 }
 header.scrolled .ul li a span {
     display: none;
@@ -365,68 +367,78 @@ section {
 }
 
 
-/* --- Seção Cursos (Círculos Interativos) --- */
-.courses-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    perspective: 1000px;
-}
-.course-circle {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.7s;
-    cursor: pointer;
-    will-change: transform; /* OTIMIZAÇÃO DE ANIMAÇÃO */
-}
-.course-circle:hover {
-    transform: rotateY(180deg);
-}
-.course-front, .course-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-}
-.course-front {
+/* --- Seção Cursos (Acordeão Interativo) --- */
+.courses-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
     background-color: var(--cinza-bg);
-    border: 3px solid var(--amarelo-principal);
 }
-.course-front i {
-    font-size: 3rem;
+.accordion-item {
+    border-bottom: 1px solid var(--cinza-card);
+}
+.accordion-item:last-child {
+    border-bottom: none;
+}
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.accordion-header:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.accordion-title-part {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.accordion-title-part i {
+    font-size: 1.8rem;
     color: var(--amarelo-principal);
-    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
 }
-.course-front h3 {
-    font-size: 1.1rem;
+.accordion-title-part h3 {
+    font-size: 1.2rem;
     font-weight: 600;
+    margin: 0;
+    transition: color 0.3s ease;
 }
-.course-back {
-    background-color: var(--amarelo-principal);
-    color: var(--texto-escuro);
-    transform: rotateY(180deg);
+.accordion-icon {
+    font-size: 1.4rem;
+    transition: transform 0.4s ease-in-out;
 }
-.course-back h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.2);
 }
-.course-back p {
-    font-size: 0.9rem;
-    line-height: 1.3;
+.accordion-content p {
+    padding: 0 2rem 1.5rem 5.3rem; /* Alinha com o texto do título */
+    line-height: 1.6;
+    color: #ccc;
 }
-.course-back strong {
-    font-weight: 700;
+.accordion-content p strong {
+    color: var(--texto-claro);
 }
+
+/* Estado Ativo do Acordeão */
+.accordion-item.active .accordion-header h3 {
+    color: var(--amarelo-principal);
+}
+.accordion-item.active .accordion-icon {
+    transform: rotate(135deg); /* Rotaciona o '+' para formar um 'x' */
+}
+.accordion-item.active .accordion-content {
+    max-height: 150px; /* Altura suficiente para o conteúdo */
+    padding-top: 1.5rem;
+}
+
 
 /* --- Seção Aulas --- */
 .aulas-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
@@ -514,6 +526,7 @@ section {
     }
     .hamburger-icon {
         display: block;
+        margin-left: 1rem; /* <<< CORREÇÃO 2: Adiciona espaço à esquerda do ícone */
     }
     .desktop-only-contact {
         display: none;
@@ -551,7 +564,10 @@ section {
 
 @media (max-width: 992px) {
     .hero .container { flex-direction: column-reverse; text-align: center; }
-    .hero-content { margin-top: 2rem; }
+    .hero-content { 
+        margin-top: 2rem;
+        width: 100%; /* <<< CORREÇÃO 1: Garante que o container não vaze */
+    }
     .hero-content p { margin-left: auto; margin-right: auto; }
 }
 
@@ -572,5 +588,15 @@ section {
     }
     .social-btn {
         width: 100%;
+    }
+
+    .accordion-header {
+        padding: 1.2rem 1.5rem;
+    }
+    .accordion-title-part h3 {
+        font-size: 1.1rem;
+    }
+    .accordion-content p {
+        padding: 0 1.5rem 1.2rem 4.5rem;
     }
 }

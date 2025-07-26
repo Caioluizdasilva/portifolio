@@ -126,6 +126,29 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+    
+    // --- LÓGICA DO ACORDEÃO DE CURSOS (NOVO) ---
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    if (accordionItems.length > 0) {
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Fecha todos os outros itens antes de abrir o novo
+                accordionItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+
+                // Se o item clicado não estava ativo, ativa ele.
+                // Se já estava ativo, o loop acima já o fechou.
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
 
     // --- DICIONÁRIO DE TRADUÇÕES ---
     const translations = {
@@ -152,6 +175,22 @@ document.addEventListener("DOMContentLoaded", function() {
             skill3Desc: "Crio interfaces visuais atraentes, intuitivas e consistentes em todos os dispositivos.",
             projectsTitle: "Projetos Recentes",
             projectButton: "Ver Projeto",
+            project1Title: "MySongs Java",
+            project1Desc: "Encapsulador de músicas desenvolvido em Java, permitindo organizar e gerenciar coleções de áudio de forma eficiente.",
+            project2Title: "Landing Page de Restaurante",
+            project2Desc: "Página de aterrissagem moderna e responsiva para um restaurante, focada na conversão e na experiência do usuário.",
+            project3Title: "Calculadora de Calorias",
+            project3Desc: "Ferramenta web para cálculo de consumo diário de calorias, com interface limpa e resultados instantâneos.",
+            project4Title: "App de Clima",
+            project4Desc: "Aplicação que consulta APIs para exibir a previsão do tempo em tempo real de qualquer cidade do mundo.",
+            project5Title: "Gerador de Senhas",
+            project5Desc: "Crie senhas seguras e customizáveis com esta ferramenta, ajustando comprimento e tipos de caracteres.",
+            project6Title: "Calculadora IMC",
+            project6Desc: "Uma calculadora simples e direta para medir o Índice de Massa Corporal, ajudando no acompanhamento da saúde.",
+            project7Title: "Kanban Board",
+            project7Desc: "Sistema de quadro Kanban para organização de tarefas, permitindo mover cards entre colunas de forma interativa.",
+            project8Title: "Projeto Acessibilidade",
+            project8Desc: "Estudo e aplicação de práticas de acessibilidade web (WCAG) para garantir que a navegação seja inclusiva para todos.",
             experienceTitle: "Experiência Profissional",
             exp1Tab: "Assistente Comercial",
             exp2Tab: "Estágio de Vendas",
@@ -225,6 +264,22 @@ document.addEventListener("DOMContentLoaded", function() {
             skill3Desc: "I create attractive, intuitive, and consistent visual interfaces across all devices.",
             projectsTitle: "Recent Projects",
             projectButton: "View Project",
+            project1Title: "MySongs Java",
+            project1Desc: "Music encapsulator developed in Java, allowing efficient organization and management of audio collections.",
+            project2Title: "Restaurant Landing Page",
+            project2Desc: "Modern and responsive landing page for a restaurant, focused on conversion and user experience.",
+            project3Title: "Calorie Calculator",
+            project3Desc: "Web tool for calculating daily calorie intake, with a clean interface and instant results.",
+            project4Title: "Weather App",
+            project4Desc: "Application that queries APIs to display the real-time weather forecast for any city in the world.",
+            project5Title: "Password Generator",
+            project5Desc: "Create secure and customizable passwords with this tool, adjusting length and character types.",
+            project6Title: "BMI Calculator",
+            project6Desc: "A simple and straightforward calculator to measure Body Mass Index, helping with health monitoring.",
+            project7Title: "Kanban Board",
+            project7Desc: "Kanban board system for task organization, allowing cards to be moved interactively between columns.",
+            project8Title: "Accessibility Project",
+            project8Desc: "Study and application of web accessibility practices (WCAG) to ensure navigation is inclusive for everyone.",
             experienceTitle: "Professional Experience",
             exp1Tab: "Commercial Assistant",
             exp2Tab: "Sales Internship",
@@ -298,6 +353,22 @@ document.addEventListener("DOMContentLoaded", function() {
             skill3Desc: "Creo interfaces visuales atractivas, intuitivas y consistentes en todos los dispositivos.",
             projectsTitle: "Proyectos Recientes",
             projectButton: "Ver Proyecto",
+            project1Title: "MySongs Java",
+            project1Desc: "Encapsulador de música desarrollado en Java, que permite organizar y gestionar colecciones de audio de forma eficiente.",
+            project2Title: "Landing Page de Restaurante",
+            project2Desc: "Página de aterrizaje moderna y responsiva para un restaurante, enfocada en la conversión y la experiencia del usuario.",
+            project3Title: "Calculadora de Calorías",
+            project3Desc: "Herramienta web para el cálculo del consumo diario de calorías, con una interfaz limpia y resultados instantáneos.",
+            project4Title: "App del Clima",
+            project4Desc: "Aplicación que consulta APIs para mostrar el pronóstico del tiempo en tiempo real de cualquier ciudad del mundo.",
+            project5Title: "Generador de Contraseñas",
+            project5Desc: "Crea contraseñas seguras y personalizables con esta herramienta, ajustando la longitud y los tipos de caracteres.",
+            project6Title: "Calculadora de IMC",
+            project6Desc: "Una calculadora simple y directa para medir el Índice de Masa Corporal, ayudando en el seguimiento de la salud.",
+            project7Title: "Tablero Kanban",
+            project7Desc: "Sistema de tablero Kanban para la organización de tareas, que permite mover tarjetas entre columnas de forma interactiva.",
+            project8Title: "Proyecto de Accesibilidad",
+            project8Desc: "Estudio y aplicación de prácticas de accesibilidad web (WCAG) para garantizar que la navegación sea inclusiva para todos.",
             experienceTitle: "Experiencia Profesional",
             exp1Tab: "Asistente Comercial",
             exp2Tab: "Pasantía de Ventas",
@@ -371,6 +442,22 @@ document.addEventListener("DOMContentLoaded", function() {
             skill3Desc: "Je crée des interfaces visuelles attrayantes, intuitives et cohérentes sur tous les appareils.",
             projectsTitle: "Projets Récents",
             projectButton: "Voir le Projet",
+            project1Title: "MySongs Java",
+            project1Desc: "Encapsuleur de musique développé en Java, permettant d'organiser et de gérer efficacement des collections audio.",
+            project2Title: "Page d'Accueil de Restaurant",
+            project2Desc: "Page d'accueil moderne et réactive pour un restaurant, axée sur la conversion et l'expérience utilisateur.",
+            project3Title: "Calculateur de Calories",
+            project3Desc: "Outil web pour le calcul de l'apport calorique quotidien, avec une interface épurée et des résultats instantanés.",
+            project4Title: "Application Météo",
+            project4Desc: "Application qui interroge des API pour afficher les prévisions météo en temps réel de n'importe quelle ville du monde.",
+            project5Title: "Générateur de Mots de Passe",
+            project5Desc: "Créez des mots de passe sécurisés et personnalisables avec cet outil, en ajustant la longueur et les types de caractères.",
+            project6Title: "Calculateur d'IMC",
+            project6Desc: "Un calculateur simple et direct pour mesurer l'Indice de Masse Corporelle, aidant au suivi de la santé.",
+            project7Title: "Tableau Kanban",
+            project7Desc: "Système de tableau Kanban pour l'organisation des tâches, permettant de déplacer les cartes entre les colonnes de manière interactive.",
+            project8Title: "Projet d'Accessibilité",
+            project8Desc: "Étude et application des pratiques d'accessibilité web (WCAG) pour garantir une navigation inclusive pour tous.",
             experienceTitle: "Expérience Professionnelle",
             exp1Tab: "Assistant Commercial",
             exp2Tab: "Stage en Ventes",
