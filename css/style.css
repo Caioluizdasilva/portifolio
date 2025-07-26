@@ -22,6 +22,9 @@ html {
     --amarelo-secundario: #ebff00;
     --texto-claro: #FFFFFF;
     --texto-escuro: #000000;
+
+    /* FIX: altura do header para usar como referência em offsets se quiser */
+    --header-height: 72px;
 }
 
 body {
@@ -167,7 +170,12 @@ header.scrolled .ul li a {
     padding: 0.6rem;
 }
 
-.controls-container { display: flex; align-items: center; gap: 1.5rem; }
+/* FIX: garantir espaçamento robusto entre itens do topo no mobile */
+.controls-container { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.25rem; /* era 1.5rem, deixou mais consistente */
+}
 .cta-button { background-color: var(--amarelo-principal); color: var(--texto-escuro); border: none; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 230, 8, 0.2); }
 .cta-button:hover { background-color: var(--amarelo-secundario); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 230, 8, 0.3); }
 .language-switcher { display: flex; gap: 0.5rem; background-color: var(--cinza-card); padding: 0.3rem; border-radius: 50px; }
@@ -178,7 +186,7 @@ header.scrolled .ul li a {
 .hamburger-icon .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--texto-claro); }
 
 /* --- Main (Hero Section) --- */
-.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--header-height); }
 .hero .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
 .hero-content { max-width: 600px; }
 .hero-content h3 { font-size: 1.5rem; font-weight: 400; }
@@ -200,12 +208,15 @@ header.scrolled .ul li a {
     overflow: hidden;
     -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
     mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    /* FIX: impede que a largura do conteúdo animado afete o fluxo */
+    position: relative;
 }
 .tech-scroller .scroller-inner {
     display: flex;
     flex-wrap: nowrap;
     gap: 2rem;
     padding-block: 1rem;
+    will-change: transform;
 }
 .tech-scroller .tag-list {
     margin: 0;
@@ -244,7 +255,14 @@ section {
 }
 
 /* --- Habilidades (Antigo Serviços) --- */
-.skill-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+/* FIX: minmax menor para não quebrar no mobile estreito e manter centralizado */
+.skill-items { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 2rem; 
+    width: 100%;
+    margin: 0 auto;
+}
 .skill-item { 
     background: var(--cinza-bg); 
     padding: 2rem; 
@@ -526,11 +544,21 @@ section {
     }
     .hamburger-icon {
         display: block;
-        margin-left: 1rem; /* <<< CORREÇÃO 2: Adiciona espaço à esquerda do ícone */
+        margin-left: 0.5rem; /* FIX: pequeno respiro do lado esquerdo */
     }
     .desktop-only-contact {
         display: none;
     }
+    /* FIX: garante que o container realmente empurre o conteúdo para o lado e deixe espaço */
+    .controls-container { 
+        flex-grow: 1; 
+        justify-content: flex-end; 
+    }
+    /* FIX: dá um espacinho entre o switch de idioma e o hambúrguer */
+    .language-switcher {
+        margin-right: .75rem;
+    }
+
     #nav-menu {
         position: fixed;
         top: 0;
@@ -546,6 +574,7 @@ section {
         gap: 2rem;
         transition: right 0.4s ease-in-out;
         z-index: 1001;
+        padding: 2rem 1rem; /* FIX: não grudar bordas */
     }
     #nav-menu.active {
         right: 0;
@@ -560,23 +589,35 @@ section {
     .hamburger-icon.active .bar:nth-child(2) { opacity: 0; }
     .hamburger-icon.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger-icon.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* FIX: tech scroller ocupa total no mobile/tablet largo também */
+    .tech-scroller {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 992px) {
     .hero .container { flex-direction: column-reverse; text-align: center; }
     .hero-content { 
         margin-top: 2rem;
-        width: 100%; /* <<< CORREÇÃO 1: Garante que o container não vaze */
     }
     .hero-content p { margin-left: auto; margin-right: auto; }
+    .tech-scroller {
+        max-width: 100%; /* CORREÇÃO 1 mantida */
+    }
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 0.75rem 0; /* FIX: header um pouco mais compacto */
+    }
+
     .section-title { font-size: 2.2rem; }
     .hero-content h1 { font-size: 3rem; }
     .hero-content h3 { font-size: 1.2rem; }
-    .controls-container { flex-grow: 1; justify-content: flex-end; }
-    
+
     .timeline::before { left: 10px; }
     .timeline-item { width: 100%; padding-left: 3rem; padding-right: 1rem; }
     .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; padding-left: 3rem; }
@@ -598,5 +639,10 @@ section {
     }
     .accordion-content p {
         padding: 0 1.5rem 1.2rem 4.5rem;
+    }
+
+    /* FIX: reduzir ainda mais o min para caber melhor em telas muito estreitas */
+    .skill-items {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
