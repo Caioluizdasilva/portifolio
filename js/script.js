@@ -127,28 +127,22 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // --- LÓGICA DO ACORDEÃO DE CURSOS (NOVO) ---
+    // --- LÓGICA DO ACORDEÃO DE CURSOS ---
     const accordionItems = document.querySelectorAll('.accordion-item');
     if (accordionItems.length > 0) {
         accordionItems.forEach(item => {
             const header = item.querySelector('.accordion-header');
             header.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-
-                // Fecha todos os outros itens antes de abrir o novo
                 accordionItems.forEach(otherItem => {
                     otherItem.classList.remove('active');
                 });
-
-                // Se o item clicado não estava ativo, ativa ele.
-                // Se já estava ativo, o loop acima já o fechou.
                 if (!isActive) {
                     item.classList.add('active');
                 }
             });
         });
     }
-
 
     // --- DICIONÁRIO DE TRADUÇÕES ---
     const translations = {
@@ -510,7 +504,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
     
-    // --- O restante do seu código de tradução e efeito de digitar ---
+    // --- Lógica de Tradução e Efeito de Digitação ---
     const languageSwitcher = document.querySelector('.language-switcher');
     const langLinks = document.querySelectorAll('.lang-link');
     let currentLang = localStorage.getItem('language') || 'pt';
@@ -523,11 +517,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.getAttribute('data-translate');
             if (translation[key]) {
-                if(element.tagName === 'SPAN' && element.parentElement.classList.contains('social-btn')) {
-                    element.textContent = translation[key];
-                } else if (element.tagName !== 'A' || !element.classList.contains('social-btn')) {
-                     element.textContent = translation[key];
-                }
+                element.textContent = translation[key];
             }
         });
         document.querySelectorAll('[data-translate-placeholder]').forEach(element => {

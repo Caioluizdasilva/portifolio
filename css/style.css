@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 html {
-    scroll-behavior: smooth; /* Habilita a rolagem suave */
+    scroll-behavior: smooth; 
+    scroll-padding-top: 100px;
 }
 
 * {
@@ -22,9 +23,6 @@ html {
     --amarelo-secundario: #ebff00;
     --texto-claro: #FFFFFF;
     --texto-escuro: #000000;
-
-    /* FIX: altura do header para usar como referência em offsets se quiser */
-    --header-height: 72px;
 }
 
 body {
@@ -32,7 +30,7 @@ body {
     color: var(--texto-claro);
     background-color: var(--cinza-bg);
     overflow-x: hidden; 
-    position: relative; /* Necessário para o z-index do blob */
+    position: relative; 
 }
 
 /* --- EFEITO DE FUNDO INTERATIVO (BLOB) --- */
@@ -46,7 +44,7 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 50%;
     z-index: -2;
-    pointer-events: none; /* Garante que o blob não interfira com cliques */
+    pointer-events: none; 
 }
 
 #blur-overlay {
@@ -170,12 +168,7 @@ header.scrolled .ul li a {
     padding: 0.6rem;
 }
 
-/* FIX: garantir espaçamento robusto entre itens do topo no mobile */
-.controls-container { 
-    display: flex; 
-    align-items: center; 
-    gap: 1.25rem; /* era 1.5rem, deixou mais consistente */
-}
+.controls-container { display: flex; align-items: center; gap: 1.5rem; }
 .cta-button { background-color: var(--amarelo-principal); color: var(--texto-escuro); border: none; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 230, 8, 0.2); }
 .cta-button:hover { background-color: var(--amarelo-secundario); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 230, 8, 0.3); }
 .language-switcher { display: flex; gap: 0.5rem; background-color: var(--cinza-card); padding: 0.3rem; border-radius: 50px; }
@@ -186,7 +179,7 @@ header.scrolled .ul li a {
 .hamburger-icon .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--texto-claro); }
 
 /* --- Main (Hero Section) --- */
-.hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--header-height); }
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
 .hero .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
 .hero-content { max-width: 600px; }
 .hero-content h3 { font-size: 1.5rem; font-weight: 400; }
@@ -201,34 +194,16 @@ header.scrolled .ul li a {
 #changing-text::after { content: ''; position: absolute; right: -8px; width: 3px; height: 100%; background-color: var(--amarelo-principal); animation: blink 0.7s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* Carrossel de Tecnologias */
+/* --- Estilos Base do Carrossel de Tecnologias --- */
 .tech-scroller {
-    max-width: 600px;
     margin-top: 2.5rem;
-    overflow: hidden;
-    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-    /* FIX: impede que a largura do conteúdo animado afete o fluxo */
-    position: relative;
 }
-.tech-scroller .scroller-inner {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 2rem;
+
+.scroller-inner {
     padding-block: 1rem;
-    will-change: transform;
 }
-.tech-scroller .tag-list {
-    margin: 0;
-    padding-inline: 0;
-    animation: scroll 40s linear infinite;
-}
-@keyframes scroll {
-    to {
-        transform: translateX(calc(-100% - 2rem));
-    }
-}
-.tech-scroller .tag-list li {
+
+.tag-list li {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -239,9 +214,33 @@ header.scrolled .ul li a {
     border-radius: 0.5rem;
     white-space: nowrap;
 }
-.tech-scroller .tag-list i {
+
+.tag-list i {
     font-size: 1.5rem;
 }
+
+/* --- Carrossel de Tecnologias (Desktop) --- */
+.tech-scroller {
+    max-width: 600px;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+.scroller-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+}
+.tech-scroller[data-animated="true"] .scroller-inner {
+    width: max-content;
+    animation: scroll 40s linear infinite;
+}
+@keyframes scroll {
+    to {
+        transform: translate(calc(-50% - 1rem));
+    }
+}
+
 
 /* --- Sections --- */
 section {
@@ -255,14 +254,7 @@ section {
 }
 
 /* --- Habilidades (Antigo Serviços) --- */
-/* FIX: minmax menor para não quebrar no mobile estreito e manter centralizado */
-.skill-items { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-    gap: 2rem; 
-    width: 100%;
-    margin: 0 auto;
-}
+.skill-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
 .skill-item { 
     background: var(--cinza-bg); 
     padding: 2rem; 
@@ -340,7 +332,7 @@ section {
     border-radius: 8px; 
     position: relative; 
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    overflow: hidden; /* Adicionado para conter o mini-blob */
+    overflow: hidden; 
 }
 .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
 .timeline-date { font-size: 0.9rem; color: #ccc; display: block; margin-bottom: 0.5rem; }
@@ -437,7 +429,7 @@ section {
     background-color: rgba(0, 0, 0, 0.2);
 }
 .accordion-content p {
-    padding: 0 2rem 1.5rem 5.3rem; /* Alinha com o texto do título */
+    padding: 0 2rem 1.5rem 5.3rem;
     line-height: 1.6;
     color: #ccc;
 }
@@ -450,10 +442,10 @@ section {
     color: var(--amarelo-principal);
 }
 .accordion-item.active .accordion-icon {
-    transform: rotate(135deg); /* Rotaciona o '+' para formar um 'x' */
+    transform: rotate(135deg); 
 }
 .accordion-item.active .accordion-content {
-    max-height: 150px; /* Altura suficiente para o conteúdo */
+    max-height: 150px; 
     padding-top: 1.5rem;
 }
 
@@ -544,21 +536,15 @@ section {
     }
     .hamburger-icon {
         display: block;
-        margin-left: 0.5rem; /* FIX: pequeno respiro do lado esquerdo */
+        margin-left: 1rem;
     }
     .desktop-only-contact {
         display: none;
     }
-    /* FIX: garante que o container realmente empurre o conteúdo para o lado e deixe espaço */
     .controls-container { 
         flex-grow: 1; 
         justify-content: flex-end; 
     }
-    /* FIX: dá um espacinho entre o switch de idioma e o hambúrguer */
-    .language-switcher {
-        margin-right: .75rem;
-    }
-
     #nav-menu {
         position: fixed;
         top: 0;
@@ -574,7 +560,6 @@ section {
         gap: 2rem;
         transition: right 0.4s ease-in-out;
         z-index: 1001;
-        padding: 2rem 1rem; /* FIX: não grudar bordas */
     }
     #nav-menu.active {
         right: 0;
@@ -589,13 +574,6 @@ section {
     .hamburger-icon.active .bar:nth-child(2) { opacity: 0; }
     .hamburger-icon.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger-icon.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    /* FIX: tech scroller ocupa total no mobile/tablet largo também */
-    .tech-scroller {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
 }
 
 @media (max-width: 992px) {
@@ -604,14 +582,12 @@ section {
         margin-top: 2rem;
     }
     .hero-content p { margin-left: auto; margin-right: auto; }
-    .tech-scroller {
-        max-width: 100%; /* CORREÇÃO 1 mantida */
-    }
 }
 
-@media (max-width: 768px) {
-    header {
-        padding: 0.75rem 0; /* FIX: header um pouco mais compacto */
+@media (max-width: 767px) {
+    /* Esconde a seção de tecnologias no mobile */
+    .tech-scroller {
+        display: none;
     }
 
     .section-title { font-size: 2.2rem; }
@@ -639,10 +615,5 @@ section {
     }
     .accordion-content p {
         padding: 0 1.5rem 1.2rem 4.5rem;
-    }
-
-    /* FIX: reduzir ainda mais o min para caber melhor em telas muito estreitas */
-    .skill-items {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
