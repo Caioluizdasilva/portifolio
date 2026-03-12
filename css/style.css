@@ -590,6 +590,9 @@ section {
     .hero-content p { margin-left: auto; margin-right: auto; }
 }
 
+.portfolio-panel { display: none; }
+.portfolio-panel.active { display: block; }
+
 @media (max-width: 767px) {
     /* Esconde a seção de tecnologias no mobile */
     .tech-scroller {

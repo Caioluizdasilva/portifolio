@@ -144,6 +144,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+// --- LÓGICA DO SELETOR DE PORTFÓLIO (DEV | DESIGN) ---
+const portfolioSwitcher = document.querySelector('.portfolio-switcher');
+if (portfolioSwitcher) {
+    const portfolioButtons = portfolioSwitcher.querySelectorAll('.portfolio-tab-btn');
+    const portfolioPanels = document.querySelectorAll('.portfolio-panel');
+
+    portfolioSwitcher.addEventListener('click', function (e) {
+        const targetButton = e.target.closest('.portfolio-tab-btn');
+        if (!targetButton) return;
+
+        const targetId = targetButton.dataset.target;
+        portfolioButtons.forEach(btn => btn.classList.remove('active'));
+        portfolioPanels.forEach(panel => panel.classList.remove('active'));
+
+        targetButton.classList.add('active');
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+        }
+    });
+}
+
     // --- DICIONÁRIO DE TRADUÇÕES ---
     const translations = {
         pt: {
