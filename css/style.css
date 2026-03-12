@@ -449,6 +449,41 @@ section {
     padding-top: 1.5rem;
 }
 
+/* PORTFOLIO TABS */
+
+.portfolio-tabs{
+display:flex;
+justify-content:center;
+gap:1rem;
+margin-bottom:3rem;
+}
+
+.portfolio-tab{
+padding:0.8rem 1.6rem;
+border-radius:30px;
+border:2px solid var(--cinza-card);
+background:transparent;
+color:var(--texto-claro);
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.portfolio-tab.active{
+background:var(--amarelo-principal);
+color:var(--texto-escuro);
+}
+
+.portfolio-panel{
+display:none;
+}
+
+.portfolio-panel.active{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:2rem;
+}
 
 /* --- Seção Aulas --- */
 .aulas-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
