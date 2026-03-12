@@ -100,62 +100,73 @@
         <section class="projects fade-in-section" id="my-projects">
             <div class="container">
                 <h2 class="section-title" data-translate="projectsTitle">Projetos Recentes</h2>
-                
-                <div class="project-items portfolio-panel">
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3>Urban Food – UI Design</h3>
-                            <p>Landing page moderna para restaurante desenvolvida no Figma, focada em conversão e experiência visual.</p>
-                        </div>
-                        <a href="https://www.figma.com/design/YhPLySG1Eo4rPVVCHKId7F/Urban-Food?node-id=0-1" target="_blank" class="project-btn">Ver Figma</a>
-                    </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3>As Anfitriãs – Imobiliária</h3>
-                            <p>Interface completa de marketplace imobiliário com foco em usabilidade e organização de imóveis.</p>
-                        </div>
-                        <a href="https://www.figma.com/design/JPxaLUYgc2K8G6MBBXWzqP/As-Anfitri%C3%A3s---PROPOSTA-DESIGN-SITE" target="_blank" class="project-btn">Ver Figma</a>
-                    </div>
+                <div class="portfolio-switcher" aria-label="Selecionar tipo de portfólio">
+                    <button class="portfolio-tab-btn active" data-target="portfolio-dev">Portfólio Dev</button>
+                    <button class="portfolio-tab-btn" data-target="portfolio-design">Portfólio Design</button>
+                </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3>Steawards – SaaS</h3>
-                            <p>Landing page moderna para startup SaaS focada em apresentação de produto digital e leads.</p>
+                <div class="portfolio-panel active" id="portfolio-dev">
+                    <div class="project-items">
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3 data-translate="project1Title">MySongs Java</h3>
+                                <p data-translate="project1Desc">Encapsulador de músicas desenvolvido em Java para gerenciar coleções de áudio.</p>
+                            </div>
+                            <a href="https://github.com/Caioluizdasilva/mysongs" target="_blank" class="project-btn" data-translate="projectButton">Ver Repo</a>
                         </div>
-                        <a href="https://www.figma.com/community/file/1613958688503225154/saas-startup-landing-page" target="_blank" class="project-btn">Ver Figma</a>
-                    </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3 data-translate="project1Title">MySongs Java</h3>
-                            <p data-translate="project1Desc">Encapsulador de músicas desenvolvido em Java para gerenciar coleções de áudio.</p>
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3 data-translate="project2Title">Sistema Bancário Python</h3>
+                                <p data-translate="project2Desc">Arquitetura MVC com SQLite para operações bancárias essenciais de console.</p>
+                            </div>
+                            <a href="https://github.com/Caioluizdasilva/banking_system" target="_blank" class="project-btn" data-translate="projectButton">Ver Repo</a>
                         </div>
-                        <a href="https://github.com/Caioluizdasilva/mysongs" target="_blank" class="project-btn" data-translate="projectButton">Ver Repo</a>
-                    </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3 data-translate="project2Title">Sistema Bancário Python</h3>
-                            <p data-translate="project2Desc">Arquitetura MVC com SQLite para operações bancárias essenciais de console.</p>
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3 data-translate="project4Title">Calculadora de Calorias</h3>
+                                <p data-translate="project4Desc">Ferramenta web para cálculo de consumo diário com interface limpa.</p>
+                            </div>
+                            <a href="https://caioluizdasilva.github.io/calculadora_calorias/" target="_blank" class="project-btn" data-translate="projectButton">Acessar Web</a>
                         </div>
-                        <a href="https://github.com/Caioluizdasilva/banking_system" target="_blank" class="project-btn" data-translate="projectButton">Ver Repo</a>
-                    </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3 data-translate="project4Title">Calculadora de Calorias</h3>
-                            <p data-translate="project4Desc">Ferramenta web para cálculo de consumo diário com interface limpa.</p>
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3 data-translate="project8Title">Kanban Board</h3>
+                                <p data-translate="project8Desc">Sistema interativo para organização de tarefas e movimentação de cards.</p>
+                            </div>
+                            <a href="https://caioluizdasilva.github.io/kanban/" target="_blank" class="project-btn" data-translate="projectButton">Acessar Web</a>
                         </div>
-                        <a href="https://caioluizdasilva.github.io/calculadora_calorias/" target="_blank" class="project-btn" data-translate="projectButton">Acessar Web</a>
                     </div>
+                </div>
 
-                    <div class="project-item">
-                        <div class="project-text-content">
-                            <h3 data-translate="project8Title">Kanban Board</h3>
-                            <p data-translate="project8Desc">Sistema interativo para organização de tarefas e movimentação de cards.</p>
+                <div class="portfolio-panel" id="portfolio-design">
+                    <div class="project-items">
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3>Urban Food – UI/UX Design</h3>
+                                <p>Projeto de UI/UX para restaurante com foco em experiência visual, hierarquia de conteúdo e conversão.</p>
+                            </div>
+                            <a href="https://www.figma.com/design/YhPLySG1Eo4rPVVCHKId7F/Urban-Food?node-id=0-1&t=b2X5n2gopPulJRaG-1" target="_blank" class="project-btn">Ver Projeto</a>
                         </div>
-                        <a href="https://caioluizdasilva.github.io/kanban/" target="_blank" class="project-btn" data-translate="projectButton">Acessar Web</a>
+
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3>As Anfitriãs – UI/UX Design</h3>
+                                <p>Design de interface para site com foco em navegação intuitiva, clareza das informações e identidade visual.</p>
+                            </div>
+                            <a href="https://www.figma.com/design/JPxaLUYgc2K8G6MBBXWzqP/As-Anfitri%C3%A3s---PROPOSTA-DESIGN-SITE?t=b2X5n2gopPulJRaG-1" target="_blank" class="project-btn">Ver Projeto</a>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-text-content">
+                                <h3>Stewards – SaaS Landing Page</h3>
+                                <p>Último projeto de design: landing page para startup SaaS com estrutura orientada a apresentação e geração de leads.</p>
+                            </div>
+                            <a href="https://www.figma.com/community/file/1613958688503225154/saas-startup-landing-page" target="_blank" class="project-btn">Ver Projeto</a>
+                        </div>
                     </div>
                 </div>
             </div>

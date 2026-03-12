@@ -293,6 +293,12 @@ section {
 }
 
 /* --- Projects --- */
+.portfolio-switcher { display: flex; justify-content: center; gap: 1rem; margin: -1rem 0 2.5rem; flex-wrap: wrap; }
+.portfolio-tab-btn { padding: 0.8rem 1.6rem; border: 2px solid var(--cinza-card); background: transparent; color: var(--texto-claro); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+.portfolio-tab-btn:hover { background-color: var(--amarelo-secundario); border-color: var(--amarelo-secundario); color: var(--texto-escuro); }
+.portfolio-tab-btn.active { background-color: var(--amarelo-principal); border-color: var(--amarelo-principal); color: var(--texto-escuro); }
+.portfolio-panel { display: none; }
+.portfolio-panel.active { display: block; }
 .project-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
 .project-item { background: var(--cinza-card); border-radius: 10px; padding: 2rem; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden; transition: all 0.4s ease; flex-basis: 350px; }
 .project-text-content { transition: all 0.4s ease; }
